@@ -6,7 +6,7 @@ import { api } from '@/lib/api'
 import type { ApplicationRow } from '@/lib/apiTypes'
 import { errorMessage, useAcademics } from '@/lib/queries'
 import { useFormat, useMe } from '@/lib/session'
-import { cn } from '@/lib/utils'
+import { appUrl, cn } from '@/lib/utils'
 import type { AdmissionStage, Application } from '@/types'
 import { Avatar, Badge, Button, Card, Dialog, EmptyState, Field, Input, PageHeader, Select, Skeleton, Table, Tabs, Td, Th, useToast } from '@/components/ui'
 
@@ -36,7 +36,7 @@ export default function AdmissionsPage() {
   const open = data?.items.find((a) => a.id === openId)
   const total = data?.items.length ?? 0
   const converted = data?.funnel.find((x) => x.stage === 'ENROLLED')?.count ?? 0
-  const publicUrl = `${location.origin}/apply/${tenant?.subdomain}`
+  const publicUrl = appUrl(`/apply/${tenant?.subdomain}`)
 
   return (
     <>

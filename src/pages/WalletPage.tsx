@@ -5,7 +5,7 @@ import { api } from '@/lib/api'
 import type { CredentialRow, Dashboard } from '@/lib/apiTypes'
 import { errorMessage } from '@/lib/queries'
 import { useFormat, useMe } from '@/lib/session'
-import { cn } from '@/lib/utils'
+import { appHostPath, cn } from '@/lib/utils'
 import { Badge, Button, Card, EmptyState, PageHeader, Skeleton, Tabs, useToast } from '@/components/ui'
 import { CredentialDialog } from './CredentialsPage'
 import { CreditStatementView } from '@/components/CreditStatement'
@@ -82,7 +82,7 @@ export default function WalletPage() {
 
       {creditBased && <div className="mt-6"><CreditStatementView learnerId={learner.id} /></div>}
 
-      <p className="mt-6 flex items-center gap-2 text-xs text-muted-foreground"><ShieldCheck className="size-4" />Employers and universities can check any credential at <span className="font-mono">{location.host}/verify</span> — no account needed. Only you decide which credentials are shareable.</p>
+      <p className="mt-6 flex items-center gap-2 text-xs text-muted-foreground"><ShieldCheck className="size-4" />Employers and universities can check any credential at <span className="font-mono">{appHostPath('/verify')}</span> — no account needed. Only you decide which credentials are shareable.</p>
       {openId && <CredentialDialog id={openId} onClose={() => setOpenId(null)} />}
     </>
   )

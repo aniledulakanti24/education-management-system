@@ -28,3 +28,12 @@ export function ageFrom(dob: string) {
   if (now.getMonth() < d.getMonth() || (now.getMonth() === d.getMonth() && now.getDate() < d.getDate())) age--
   return age
 }
+
+/** Absolute URL of an in-app route, honouring the deploy base path (e.g. GitHub Pages sub-folder). */
+export const appUrl = (path: string) => `${location.origin}${import.meta.env.BASE_URL.replace(/\/$/, '')}${path}`
+
+/** The same URL without the scheme, for display. */
+export const appHostPath = (path: string) => appUrl(path).replace(/^https?:\/\//, '')
+
+/** Router basename derived from the deploy base path. */
+export const routerBase = import.meta.env.BASE_URL.replace(/\/$/, '') || '/'

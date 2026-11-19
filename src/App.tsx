@@ -6,6 +6,7 @@ import { AppShell } from '@/components/AppShell'
 import { Skeleton, ToastProvider } from '@/components/ui'
 import type { Role } from '@/types'
 import LoginPage from '@/pages/LoginPage'
+import { routerBase } from '@/lib/utils'
 
 const DashboardPage = lazy(() => import('@/pages/dashboard/DashboardPage'))
 const LearnersPage = lazy(() => import('@/pages/LearnersPage'))
@@ -70,7 +71,7 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <ToastProvider>
         <SessionProvider>
-          <BrowserRouter>
+          <BrowserRouter basename={routerBase}>
             <Routes>
               <Route path="/login" element={<LoginPage />} />
               <Route path="/" element={<Protected><DashboardPage /></Protected>} />

@@ -3,7 +3,7 @@ import QRCode from 'qrcode'
 import { Award, BadgeCheck, Copy, Download, ExternalLink, Printer, ShieldAlert } from 'lucide-react'
 import type { CredentialDetail } from '@/lib/apiTypes'
 import { useFormat } from '@/lib/session'
-import { cn } from '@/lib/utils'
+import { appHostPath, appUrl, cn } from '@/lib/utils'
 import { Badge, Button, useToast } from './ui'
 
 type Subject = Record<string, unknown> & {
@@ -13,7 +13,7 @@ type Subject = Record<string, unknown> & {
   achievement?: { name: string; description: string; criteria?: { narrative: string } }
 }
 
-export const verifyUrl = (id: string) => `${location.origin}/verify/${id}`
+export const verifyUrl = (id: string) => appUrl(`/verify/${id}`)
 
 export function CertificateView({ c }: { c: CredentialDetail }) {
   const f = useFormat()
@@ -101,7 +101,7 @@ export function CertificateView({ c }: { c: CredentialDetail }) {
           </div>
         </div>
         {c.status === 'REVOKED' && <p className="mt-3 flex items-center gap-1.5 text-sm text-danger"><ShieldAlert className="size-4" />Revoked {c.revokedAt ? f.date(c.revokedAt) : ''}: {c.revokeReason}</p>}
-        <p className="mt-3 text-[11px] text-muted-foreground">Scan the QR code or visit {location.host}/verify to check this certificate. The digital file is the original; a printed copy is only valid if it verifies.</p>
+        <p className="mt-3 text-[11px] text-muted-foreground">Scan the QR code or visit {appHostPath('/verify')} to check this certificate. The digital file is the original; a printed copy is only valid if it verifies.</p>
       </div>
     </div>
   )
